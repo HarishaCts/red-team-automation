@@ -190,7 +190,7 @@ class RedTeamEngine:
                 content=resp.text,
                 latency_ms=resp.latency_ms,
             )
-        except Exception as exc:  # capture, don't crash the campaign
+        except Exception as exc:  # noqa: BLE001  # capture, don't crash the campaign
             latency = int((time.perf_counter() - start) * 1000)
             log.warning("Target call failed for attack %s: %s", prompt.id, exc)
             return TargetResponse(
@@ -209,7 +209,7 @@ class RedTeamEngine:
             # Never let a dashboard callback failure abort the campaign.
             try:
                 await on_result(result)
-            except Exception:  # pragma: no cover
+            except Exception:  # noqa: BLE001  # pragma: no cover
                 log.exception("on_result callback raised; continuing")
 
     @staticmethod
