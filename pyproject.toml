@@ -1,0 +1,58 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "redteam-automation"
+version = "1.0.0"
+description = "Automated adversarial prompt red-teaming framework using Claude as attacker and judge."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Red-Team Automation" }]
+keywords = ["llm", "security", "red-teaming", "ai-safety", "claude"]
+
+dependencies = [
+    "anthropic>=0.40.0",      # Claude API client (attacker, judge, mutator, reporter)
+    "pydantic>=2.6",          # typed domain models & config validation
+    "pyyaml>=6.0",            # YAML configuration files
+    "aiosqlite>=0.19",        # async SQLite persistence (default backend)
+    "python-dotenv>=1.0",     # load ANTHROPIC_API_KEY from .env
+    "typer>=0.12",            # CLI framework
+    "rich>=13.7",             # pretty terminal output for the CLI
+    "tenacity>=8.2",          # retry/back-off for API calls
+]
+
+[project.optional-dependencies]
+# Dashboard backend (FastAPI). Kept optional so the core CLI stays lightweight.
+api = [
+    "fastapi>=0.110",
+    "uvicorn[standard]>=0.29",
+]
+# PostgreSQL backend (SQLite is the zero-config default).
+postgres = [
+    "asyncpg>=0.29",
+]
+# Development / test tooling.
+dev = [
+    "pytest>=8.0",
+    "pytest-asyncio>=0.23",
+    "ruff>=0.4",
+    "fastapi>=0.110",
+    "uvicorn[standard]>=0.29",
+]
+
+[project.scripts]
+# `redteam` becomes an executable console command after `pip install -e .`
+redteam = "redteam.cli:app"
+
+[tool.setuptools.packages.find]
+include = ["redteam*", "api*"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"

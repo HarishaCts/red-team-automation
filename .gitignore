@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+
+# Environment & secrets
+.env
+config/config.yaml
+
+# Runtime artifacts
+*.db
+*.sqlite3
+reports/
+!reports/.gitkeep
+
+# Node / dashboard
+dashboard/node_modules/
+dashboard/dist/
+
+# OS
+.DS_Store
+Thumbs.db

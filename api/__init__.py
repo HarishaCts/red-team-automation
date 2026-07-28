@@ -1,0 +1,1 @@
+"""FastAPI backend serving campaign data and a live attack feed to the dashboard."""

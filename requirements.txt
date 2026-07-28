@@ -1,0 +1,15 @@
+# Runtime dependencies (mirror of [project.dependencies] in pyproject.toml).
+# Prefer `pip install -e ".[dev]"` for development; this file is provided for
+# environments that consume a flat requirements list (e.g. some CI runners).
+anthropic>=0.40.0
+pydantic>=2.6
+pyyaml>=6.0
+aiosqlite>=0.19
+python-dotenv>=1.0
+typer>=0.12
+rich>=13.7
+tenacity>=8.2
+
+# Dashboard backend (optional but included for convenience).
+fastapi>=0.110
+uvicorn[standard]>=0.29
